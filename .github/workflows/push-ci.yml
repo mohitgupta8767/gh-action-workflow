@@ -93,7 +93,8 @@ jobs:
         run: ls
 
       - name: Output Build Version
-        run: echo "Build Version: ${{ needs.build.outputs.build_version }}"
+        run: |
+          echo "Build Version: ${{ needs.build.outputs.build_version }}"
 
       - name: Deploy build
         run: echo "Deploying build..."
