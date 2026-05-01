@@ -3,6 +3,7 @@ name: Push CI Pipeline
 on:
   pull_request:
     types: opened
+  workflow_dispatch:
 jobs:
   lint:
     name: Lint
