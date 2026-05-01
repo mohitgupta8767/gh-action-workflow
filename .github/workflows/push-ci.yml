@@ -47,6 +47,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      build-version: ${{ steps.build.outputs.build-version }}
     needs: test
     steps:
       - name: Checkout code
@@ -64,6 +66,10 @@ jobs:
       - name: Run build
         run: npm run build
 
+      - name: Publish JS filename
+        id: build
+        run: find dist -type f -name '*.js' -exec sh -c 'echo "{}" >> $GITHUB_OUTPUT' \;
+
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
@@ -80,6 +86,12 @@ jobs:
         with:
           name: build
           path: dist
+
+      - name: Output Contents
+        run: ls
+
+      - name: Output Build Version
+        run: echo "Build Version: ${{ needs.build.outputs.build-version }}"
 
       - name: Deploy build
         run: echo "Deploying build..."
