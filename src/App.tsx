@@ -42,7 +42,7 @@ function App() {
   return (
     <main className="app-shell">
       <section className="todo-card">
-        <h1>Todo App</h1>
+        <h2>Todo App</h2>
         <p className="description">Manage your daily tasks with reusable components.</p>
         <TodoForm onAddTodo={addTodo} />
         <TodoList todos={todos} onToggle={toggleTodo} onRemove={removeTodo} />
