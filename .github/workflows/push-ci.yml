@@ -48,7 +48,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     outputs:
-      build-version: ${{ steps.build.outputs.build-version }}
+      build_version: ${{ steps.build.outputs.build_version }}
     needs: test
     steps:
       - name: Checkout code
@@ -68,7 +68,9 @@ jobs:
 
       - name: Publish JS filename
         id: build
-        run: find dist -type f -name '*.js' -exec sh -c 'echo "{}" >> $GITHUB_OUTPUT' \;
+        run: |
+          js_file="$(find dist -type f -name '*.js' | head -n 1)"
+          echo "build_version=${js_file}" >> "$GITHUB_OUTPUT"
 
       - name: Upload build
         uses: actions/upload-artifact@v4
@@ -91,7 +93,7 @@ jobs:
         run: ls
 
       - name: Output Build Version
-        run: echo "Build Version: ${{ needs.build.outputs.build-version }}"
+        run: echo "Build Version: ${{ needs.build.outputs.build_version }}"
 
       - name: Deploy build
         run: echo "Deploying build..."
