@@ -44,7 +44,7 @@ jobs:
       - name: Run test script
         run: npm run test
 
-   build:
+  build:
     name: Build
     runs-on: ubuntu-latest
     needs: test
